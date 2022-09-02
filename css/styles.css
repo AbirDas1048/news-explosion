@@ -1,6 +1,4 @@
-/* .card-text {
-
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-} */
+p {
+    margin: 0;
+    padding: 0;
+}

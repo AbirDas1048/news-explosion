@@ -81,7 +81,7 @@ const displayNews = data => {
         div.classList.add('mb-3');
         div.classList.add('border-0');
         let details = news.details;
-        //console.log(news.title, details.length);
+        //console.log(news.author.rating);
 
         if (details.length >= 754) {
             details = details.slice(0, 754) + '...';
@@ -90,13 +90,36 @@ const displayNews = data => {
         }
 
         div.innerHTML = `<div class="row g-0 p-3">
-                    <div class="col-md-3">
-                        <img src="${news.thumbnail_url}" class="img-fluid rounded-start" alt="...">
+                    <div class="col-md-3 col-12">
+                        <img src="${news.thumbnail_url}" class="img-fluid rounded w-100" alt="...">
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-md-9 col-12">
                         <div class="card-body">
                             <h5 class="card-title">${news.title}</h5>
                             <p class="card-text">${details}</p>
+                            <div class="row">
+                                <div class="col-3">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <img src="${news.author.img}" class="img-fluid rounded-circle" alt="...">
+                                        </div>
+                                        <div class="col-8">
+                                            <p>${news.author.name}</p>
+                                            <p>${news.author.published_date}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <p>${news.total_view}</p>
+                                </div>
+                                <div class="col-3">
+                                    <p>${news.rating.badge}</p>
+                                    <p>${news.rating.number}</p>
+                                </div>
+                                <div class="col-3">
+                                    <p></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>`;
