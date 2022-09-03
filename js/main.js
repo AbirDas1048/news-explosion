@@ -162,3 +162,58 @@ const toogleLoader = (isLoading) => {
         loaderSection.classList.add('d-none');
     }
 }
+
+const newsDetails = (news_id) => {
+    const url = `https://openapi.programming-hero.com/api/news/${news_id}`;
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            displayNewsDetails(data);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
+
+const displayNewsDetails = (data) => {
+    const modalLabel = document.getElementById('newsModalLabel');
+    //console.log(data.data[0]);
+    modalLabel.innerText = data.data[0].title;
+
+    const newsContent = document.getElementById('news-content');
+    newsContent.textContent = "";
+    const div = document.createElement('div');
+    div.classList.add('card');
+    div.classList.add('mb-3');
+    div.classList.add('border-0');
+
+    div.innerHTML = `<img src="${data.data[0].image_url}" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title fw-bold">${data.data[0].title}</h5>
+        <p class="card-text">${data.data[0].details}</p>
+        <div class="row align-items-center justify-content-between g-3 mt-2 fw-semibold">
+            <div class="col-lg-6 col-md-6 col-12">
+                <div class="row align-items-center">
+                    <div class="col-lg-2 col-md-4 col-2">
+                        <img src="${data.data[0].author.img}" class="img-fluid rounded-circle w-100" alt="...">
+                    </div>
+                    <div class="col-lg-10 col-md-8 col-10">
+                        <p>${data.data[0].author.name ? data.data[0].author.name : 'No data found'}</p>
+                        <p class="text-black-50">${data.data[0].author.published_date ? data.data[0].author.published_date : 'No data found'}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-6 col-4 text-center">
+                <p class="text-black-50 fw-bolder"><i class="far fa-eye"></i> ${data.data[0].total_view ? data.data[0].total_view : 'No data found'}</p>
+            </div>
+            <div class="col-lg-2 col-md-6 col-4 text-center">
+                <p class="text-black-50"><i class="fas fa-star-half-alt"></i> ${data.data[0].rating.number ? data.data[0].rating.number : 'No data found'}</p>
+            </div>
+            
+        </div>
+    </div>
+  `;
+
+    newsContent.appendChild(div);
+
+}
