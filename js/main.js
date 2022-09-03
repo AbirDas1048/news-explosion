@@ -217,3 +217,6 @@ const displayNewsDetails = (data) => {
     newsContent.appendChild(div);
 
 }
+
+
+
