@@ -119,18 +119,18 @@ const displayNews = (data, category_name) => {
                                             <img src="${news.author.img}" class="img-fluid rounded-circle w-100" alt="...">
                                         </div>
                                         <div class="col-lg-10 col-md-8 col-10">
-                                            <p>${news.author.name ? news.author.name : 'No data found'}</p>
-                                            <p class="text-black-50">${news.author.published_date ? news.author.published_date : 'No data found'}</p>
+                                            <p>${news.author.name ? news.author.name : 'No data available'}</p>
+                                            <p class="text-black-50">${news.author.published_date ? news.author.published_date : 'No data available'}</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-2 col-md-6 col-4 text-center">
-                                    <p class="text-black-50 fw-bolder"><i class="far fa-eye"></i> ${news.total_view ? news.total_view : 'No data found'}</p>
+                                    <p class="text-black-50 fw-bolder"><i class="far fa-eye"></i> ${news.total_view ? news.total_view : 'No data available'}</p>
                                 </div>
                                 <div class="col-lg-2 col-md-6 col-4 text-center">
-                                    <p class="text-black-50"><i class="fas fa-star-half-alt"></i> ${news.rating.number ? news.rating.number : 'No data found'}</p>
+                                    <p class="text-black-50"><i class="fas fa-star-half-alt"></i> ${news.rating.number ? news.rating.number : 'No data available'}</p>
                                 </div>
-                                <div class="col-lg-2 col-md-6 col-4 text-center">
+                                <div class="col-lg-2 col-md-6 col-4 text-end">
                                     
                                     
                                     <p class="text-primary"><i class="fas fa-arrow-right" onclick="newsDetails('${news._id}')" data-bs-toggle="modal" data-bs-target="#newsModal"></i></p>
@@ -192,16 +192,16 @@ const displayNewsDetails = (data) => {
                         <img src="${data.data[0].author.img}" class="img-fluid rounded-circle w-100" alt="...">
                     </div>
                     <div class="col-lg-10 col-md-8 col-10">
-                        <p>${data.data[0].author.name ? data.data[0].author.name : 'No data found'}</p>
-                        <p class="text-black-50">${data.data[0].author.published_date ? data.data[0].author.published_date : 'No data found'}</p>
+                        <p>${data.data[0].author.name ? data.data[0].author.name : 'No data available'}</p>
+                        <p class="text-black-50">${data.data[0].author.published_date ? data.data[0].author.published_date : 'No data available'}</p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-6 text-center">
-                <p class="text-black-50 fw-bolder"><i class="far fa-eye"></i> ${data.data[0].total_view ? data.data[0].total_view : 'No data found'}</p>
+                <p class="text-black-50 fw-bolder"><i class="far fa-eye"></i> ${data.data[0].total_view ? data.data[0].total_view : 'No data available'}</p>
             </div>
             <div class="col-lg-3 col-md-6 col-6 text-center">
-                <p class="text-black-50"><i class="fas fa-star-half-alt"></i> ${data.data[0].rating.number ? data.data[0].rating.number : 'No data found'}</p>
+                <p class="text-black-50"><i class="fas fa-star-half-alt"></i> ${data.data[0].rating.number ? data.data[0].rating.number : 'No data available'}</p>
             </div>
             
         </div>
