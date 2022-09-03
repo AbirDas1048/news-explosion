@@ -1,27 +1,3 @@
-// const fetchData = (url) => {
-//     fetch(url)
-//         .then(response => response.json())
-//         .then(data => {
-//             return data;
-//         })
-//         .catch(error => {
-//             console.error(error);
-//         });
-
-// }
-// const fetchData = async (url) => {
-//     try {
-//         //const url = 'https://openapi.programming-hero.com/api/news/categories';
-//         const res = await fetch(url);
-//         const data = await res.json();
-//         //console.log(data);
-//         return data;
-//     }
-//     catch (error) {
-//         console.log(error);
-//     }
-
-// }
 
 const loadCategories = () => {
     fetch('https://openapi.programming-hero.com/api/news/categories')
@@ -39,19 +15,17 @@ loadCategories();
 const displayCategories = data => {
 
     const categoryNav = document.getElementById('category-nav');
-    //console.log(categoryNav);
     const categories = (data.data.news_category);
 
     categories.forEach(category => {
         const link = document.createElement('a');
         link.classList.add('nav-link');
-        //link.classList.add('active');
+        link.classList.add('text-black-50');
         link.innerText = category.category_name;
 
         link.setAttribute('onclick', `loadNews('${category.category_id}', '${category.category_name}')`);
 
         link.setAttribute('id', `${category.category_id}`);
-        //console.log(category);
         categoryNav.appendChild(link);
     });
 
@@ -63,12 +37,16 @@ const loadNews = (category_id, category_name) => {
     const allLinks = document.querySelectorAll('#category-nav a');
     allLinks.forEach(link => {
         link.classList.remove('active');
+        link.classList.remove('text-white');
+        link.classList.add('text-black-50');
     });
-    //allLinks.classList.remove('active');
+
     const selectedLink = document.getElementById(category_id);
     selectedLink.classList.add('active');
+    selectedLink.classList.remove('text-black-50');
+    selectedLink.classList.add('text-white');
     const url = `https://openapi.programming-hero.com/api/news/category/${category_id}`;
-    //console.log(category_id)
+
     fetch(url)
         .then(response => response.json())
         .then(data => displayNews(data, category_name))
@@ -77,7 +55,6 @@ const loadNews = (category_id, category_name) => {
         });
 }
 
-//loadNews();
 
 const displayNews = (data, category_name) => {
 
@@ -91,7 +68,7 @@ const displayNews = (data, category_name) => {
     } else {
         countNews.innerText = `No items found for category ${category_name}`;
     }
-    //console.log(newsLength);
+
 
     allNews.sort((a, b) => b.total_view - a.total_view);
 
@@ -100,6 +77,7 @@ const displayNews = (data, category_name) => {
         div.classList.add('card');
         div.classList.add('mb-3');
         div.classList.add('border-0');
+
         let details = news.details;
 
         if (details.length >= 600) {
@@ -136,17 +114,13 @@ const displayNews = (data, category_name) => {
                                 </div>
                                 <div class="col-lg-2 col-md-6 col-4 text-center">
                                     
-                                    <button type="button" onclick="newsDetails('${news._id}')" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newsModal">Details</button>
+                                    
+                                    <p class="text-primary"><i class="fas fa-arrow-right" onclick="newsDetails('${news._id}')" data-bs-toggle="modal" data-bs-target="#newsModal"></i></p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>`;
-
-        //link.setAttribute('id', `${category.category_id}`)
-        //console.log(category);
-
-        // <p class="text-primary"><i class="fas fa-arrow-right"></i></p>
         newsSection.appendChild(div);
     });
 
@@ -177,7 +151,6 @@ const newsDetails = (news_id) => {
 
 const displayNewsDetails = (data) => {
     const modalLabel = document.getElementById('newsModalLabel');
-    //console.log(data.data[0]);
     modalLabel.innerText = data.data[0].title;
 
     const newsContent = document.getElementById('news-content');
@@ -203,10 +176,10 @@ const displayNewsDetails = (data) => {
                     </div>
                 </div>
             </div>
-            <div class="col-lg-2 col-md-6 col-4 text-center">
+            <div class="col-lg-3 col-md-6 col-6 text-center">
                 <p class="text-black-50 fw-bolder"><i class="far fa-eye"></i> ${data.data[0].total_view ? data.data[0].total_view : 'No data found'}</p>
             </div>
-            <div class="col-lg-2 col-md-6 col-4 text-center">
+            <div class="col-lg-3 col-md-6 col-6 text-center">
                 <p class="text-black-50"><i class="fas fa-star-half-alt"></i> ${data.data[0].rating.number ? data.data[0].rating.number : 'No data found'}</p>
             </div>
             
